@@ -1,0 +1,24 @@
+# copilot.yaml
+objectives:
+  - Existem dois projetos: um para migração de dados (data-migration) e outro para consulta de dados (data-query).
+  - Seguir Clean Code e SOLID, usando TypeScript, classes e interfaces.
+  - Utilizar Knex para migrations e ORM seguro para consultas.
+  - Implementar testes unitários e de integração.
+  - Aplicar padrões de projeto quando necessário.
+  - Seguir boas práticas de arquitetura e clean architecture.
+  - Utilizar Node.js, Postgres e AWS.
+  - O agent deve sempre atualizar o README.md caso necessário.
+
+folders:
+  data-migration:
+    description: Projeto responsável por migração e estruturação do banco de dados Postgres, utilizando Knex para migrations.
+  data-query:
+    description: Projeto responsável por buscar dados de investimentos (financial_asset) do tipo "stock" e consultar informações de mercado via API, usando ORM seguro e wrapper para integração.
+
+infra:
+  - docker-compose.yml para orquestração dos serviços (Node e Postgres) com volumes persistentes.
+  - Usando a lib Prisama para ORM seguro. https://www.prisma.io/docs
+  - Comando para rodar o Knex migrations.
+
+readme:
+  - Sempre atualizado conforme mudanças nos projetos.

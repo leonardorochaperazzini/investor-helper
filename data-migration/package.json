@@ -1,0 +1,23 @@
+{
+  "name": "data-migration",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "migrate": "npm exec knex migrate:latest -- --knexfile knexfile.js",
+    "seed:type": "npm exec knex seed:run -- --knexfile knexfile.js --specific=20230809_seed_financial_asset_type.ts",
+    "seed:group": "npm exec knex seed:run -- --knexfile knexfile.js --specific=20230809_seed_invest_group.ts",
+    "seed:asset": "npm exec knex seed:run -- --knexfile knexfile.js --specific=20230809_seed_financial_asset.ts",
+    "seed:all": "npm run seed:type && npm run seed:group && npm run seed:asset"
+  },
+  "dependencies": {
+    "pg": "^8.0.0",
+    "typescript": "^5.0.0",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "knex": "^3.0.0",
+    "ts-node": "^10.0.0"
+  }
+}

@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-3.0.x", "linux-arm64-openssl-1.1.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model FinancialAssetType {
+  id              Int              @id @default(autoincrement())
+  code            String           @unique
+  description     String?
+  country         String?          @map("country")
+  financialAssets FinancialAsset[]
+  investGroups    InvestGroup[]
+
+  @@index([code], name: "idx_financial_asset_type_code")
+  @@map("financial_asset_type")
+}
+
+model InvestGroup {
+  id                 Int                @id @default(autoincrement())
+  typeId             Int                @map("type_id")
+  desiredValue       Float?             @map("desired_value")
+  financialAssetType FinancialAssetType @relation(fields: [typeId], references: [id])
+  financialAssets    FinancialAsset[]
+
+  @@index([typeId], name: "idx_invest_group_type_id")
+  @@map("invest_group")
+}
+
+model FinancialAsset {
+  id                 Int               @id @default(autoincrement())
+  code               String            @unique
+  description        String?
+  desiredValue       Float?            @map("desired_value")
+  currentMarketValue Float?            @map("current_market_value")
+  amount             Float?            @map("amount")
+  typeId             Int               @map("type_id")
+  groupId            Int?              @map("group_id")
+
+  financialAssetType FinancialAssetType @relation(fields: [typeId], references: [id])
+  investGroup        InvestGroup?       @relation(fields: [groupId], references: [id])
+
+  @@index([code], name: "idx_financial_asset_code")
+  @@index([typeId], name: "idx_financial_asset_type_id")
+  @@index([groupId], name: "idx_financial_asset_group_id")
+  @@map("financial_asset")
+}
