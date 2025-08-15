@@ -5,7 +5,7 @@ export async function up(knex: Knex): Promise<void> {
     table.increments('id').primary();
     table.string('code').notNullable();
     table.string('description');
-    table.float('desired_value');
+    table.float('desired_percentage_value');
     table.float('current_market_value');
     table.float('amount');
     table

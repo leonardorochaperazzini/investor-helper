@@ -22,6 +22,7 @@ export async function seed(knex: Knex): Promise<void> {
       { id: 8, code: 'fixed-income-us', description: 'Renda Fixa EUA', country: 'US' },
       { id: 9, code: 'reservation-money', description: 'Reserva de Emergência', country: 'BR' },
       { id: 10, code: 'etf-cripto-br', description: 'ETFs de Cripto Brasil', country: 'BR' },
+      { id: 11, code: 'fgts-br', description: 'FGTS Brasil', country: 'BR' },
     ];
 
     await trx('financial_asset_type').insert(types);

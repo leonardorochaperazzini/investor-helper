@@ -9,12 +9,13 @@ datasource db {
 }
 
 model FinancialAssetType {
-  id              Int              @id @default(autoincrement())
-  code            String           @unique
+  id              Int                      @id @default(autoincrement())
+  code            String                   @unique
   description     String?
-  country         String?          @map("country")
+  country         String?                  @map("country")
   financialAssets FinancialAsset[]
   investGroups    InvestGroup[]
+  histories       FinancialAssetHistory[]  @relation("FinancialAssetTypeToHistory")
 
   @@index([code], name: "idx_financial_asset_type_code")
   @@map("financial_asset_type")
@@ -23,7 +24,7 @@ model FinancialAssetType {
 model InvestGroup {
   id                 Int                @id @default(autoincrement())
   typeId             Int                @map("type_id")
-  desiredValue       Float?             @map("desired_value")
+  desiredPercentageValue       Float?             @map("desired_percentage_value")
   financialAssetType FinancialAssetType @relation(fields: [typeId], references: [id])
   financialAssets    FinancialAsset[]
 
@@ -32,14 +33,14 @@ model InvestGroup {
 }
 
 model FinancialAsset {
-  id                 Int               @id @default(autoincrement())
-  code               String            @unique
+  id                 Int                @id @default(autoincrement())
+  code               String             @unique
   description        String?
-  desiredValue       Float?            @map("desired_value")
-  currentMarketValue Float?            @map("current_market_value")
-  amount             Float?            @map("amount")
-  typeId             Int               @map("type_id")
-  groupId            Int?              @map("group_id")
+  desiredPercentageValue       Float?             @map("desired_percentage_value")
+  currentMarketValue Float?             @map("current_market_value")
+  amount             Float?             @map("amount")
+  typeId             Int                @map("type_id")
+  groupId            Int?               @map("group_id")
 
   financialAssetType FinancialAssetType @relation(fields: [typeId], references: [id])
   investGroup        InvestGroup?       @relation(fields: [groupId], references: [id])
@@ -48,4 +49,23 @@ model FinancialAsset {
   @@index([typeId], name: "idx_financial_asset_type_id")
   @@index([groupId], name: "idx_financial_asset_group_id")
   @@map("financial_asset")
+}
+
+model FinancialAssetHistory {
+  id                 Int                 @id @default(autoincrement())
+  code               String
+  desiredPercentageValue       Float?              @map("desired_percentage_value")
+  marketValue        Float?              @map("market_value")
+  amount             Float?              @map("amount")
+  typeCode           String?             @map("type_code")
+  groupdesiredPercentageValue  Float?              @map("group_desired_percentage_value")
+  insertedDate       DateTime            @default(now()) @map("inserted_date") @db.Date
+
+  financialAssetType FinancialAssetType? @relation("FinancialAssetTypeToHistory", fields: [typeCode], references: [code])
+
+  @@index([code], name: "idx_financial_asset_history_code")
+  @@index([insertedDate], name: "idx_financial_asset_history_inserted_date")
+  @@index([typeCode], name: "idx_financial_asset_history_type_code")
+  @@unique([code, insertedDate])
+  @@map("financial_asset_history")
 }
