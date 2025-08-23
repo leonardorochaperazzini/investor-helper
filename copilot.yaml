@@ -7,7 +7,7 @@ objectives:
   - Aplicar padrões de projeto quando necessário.
   - Seguir boas práticas de arquitetura e clean architecture.
   - Utilizar Node.js, Postgres e AWS.
-  - O agent deve sempre atualizar o README.md caso necessário.
+  - O agent deve sempre atualizar o README.md e src/README_CLEAN_ARCH caso necessário, além de olhar para README_CLEAN_ARCH quando quiser entender a estruturação.
 
 folders:
   data-migration:

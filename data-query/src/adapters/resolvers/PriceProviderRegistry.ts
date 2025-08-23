@@ -1,6 +1,6 @@
 import { IPriceProvider } from '../../application/ports/IPriceProvider';
 import { IPriceProviderResolver } from '../../application/ports/IPriceProviderResolver';
-import { AssetTypeCode } from '../../domain/value-objects/AssetType';
+import { AssetTypeCode } from '../../domain/value_objects/AssetType';
 
 export class PriceProviderRegistry implements IPriceProviderResolver {
   private readonly map = new Map<AssetTypeCode, IPriceProvider>();

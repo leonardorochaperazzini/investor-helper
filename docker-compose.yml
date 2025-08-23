@@ -29,10 +29,15 @@ services:
   query:
     build:
       context: ./data-query
-    command: sh -c "npm install && npm run generate && npm start"
+    command: sh -c "npm install && npm run generate && npm run dev:api"
     environment:
       DATABASE_URL: postgres://invest:invest@postgres:5432/invest
       NODE_ENV: development
+      PORT: 3000
+      BRAPI_TOKEN: ${BRAPI_TOKEN}
+      ALPHAVANTAGE_API_KEY: ${ALPHAVANTAGE_API_KEY}
+    ports:
+      - "3000:3000"
     depends_on:
       - postgres
     volumes:

@@ -13,6 +13,7 @@ model FinancialAssetType {
   code            String                   @unique
   description     String?
   country         String?                  @map("country")
+  currencyPrice   Float                    @default(1) @map("currency_price")
   financialAssets FinancialAsset[]
   investGroups    InvestGroup[]
   histories       FinancialAssetHistory[]  @relation("FinancialAssetTypeToHistory")

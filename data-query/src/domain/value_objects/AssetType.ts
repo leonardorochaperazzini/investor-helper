@@ -9,6 +9,7 @@ export const AssetType = {
   FixedIncomeUs: 'fixed-income-us',
   ReservationMoney: 'reservation-money',
   EtfCriptoBr: 'etf-cripto-br',
+  FgtsBr: 'fgts-br',
 } as const;
 
 export type AssetTypeCode = typeof AssetType[keyof typeof AssetType];

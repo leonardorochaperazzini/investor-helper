@@ -1,12 +1,25 @@
-export class FinancialAsset {
-  constructor(
-    public readonly id: number,
-    public readonly code: string,
-    public readonly description: string | null,
-    public readonly desiredPercentageValue: number | null,
-    public currentMarketValue: number | null,
-    public readonly amount: number | null,
-    public readonly typeId: number,
-    public readonly groupId: number | null
-  ) {}
+export interface FinancialAssetType {
+  id: number;
+  code: string;
+  description: string;
+  country: string;
+}
+
+export interface InvestGroup {
+  id: number;
+  typeId: number;
+  desiredPercentageValue: number;
+}
+
+export interface FinancialAsset {
+  id: number;
+  code: string;
+  description: string | null;
+  desiredPercentageValue: number | null;
+  currentMarketValue: number | null;
+  amount: number | null;
+  typeId: number;
+  groupId: number | null;
+  type?: FinancialAssetType;
+  group?: InvestGroup;
 }
